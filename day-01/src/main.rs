@@ -8,16 +8,18 @@ fn main() {
 }
 
 fn part_1(input: &str) -> usize {
-    input.split("\n\n")
-    .map(|elf| elf.lines().map(|item| item.parse::<usize>().unwrap()).sum())
-    .max()
-    .unwrap()
+    input
+        .split("\n\n")
+        .map(|elf| elf.lines().map(|item| item.parse::<usize>().unwrap()).sum())
+        .max()
+        .unwrap()
 }
 
 fn part_2(input: &str) -> usize {
-    let mut elves = input.split("\n\n")
-    .map(|elf| elf.lines().map(|line| line.parse::<usize>().unwrap()).sum())
-    .collect::<Vec<usize>>();
+    let mut elves = input
+        .split("\n\n")
+        .map(|elf| elf.lines().map(|line| line.parse::<usize>().unwrap()).sum())
+        .collect::<Vec<usize>>();
 
     elves.sort();
 

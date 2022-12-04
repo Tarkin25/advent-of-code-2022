@@ -12,10 +12,11 @@ fn main() {
 }
 
 fn part_1(input: &str) -> usize {
-    input.lines()
-    .map(find_item_in_both_compartments)
-    .map(priority)
-    .sum()
+    input
+        .lines()
+        .map(find_item_in_both_compartments)
+        .map(priority)
+        .sum()
 }
 
 #[test]
@@ -26,7 +27,7 @@ PmmdzqPrVvPwwTWBwg
 wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
 ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw"#;
-    
+
     assert_eq!(part_1(input), 157);
 }
 
@@ -35,17 +36,32 @@ fn find_item_in_both_compartments(line: &str) -> char {
 
     let left_items = left.chars().collect::<HashSet<_>>();
 
-    right.chars().find(|item| left_items.contains(item)).expect("No common item found")
+    right
+        .chars()
+        .find(|item| left_items.contains(item))
+        .expect("No common item found")
 }
 
 #[test]
 fn find_item_in_both_compartments_works() {
-    assert_eq!(find_item_in_both_compartments("vJrwpWtwJgWrhcsFMMfFFhFp"), 'p');
-    assert_eq!(find_item_in_both_compartments("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"), 'L');
+    assert_eq!(
+        find_item_in_both_compartments("vJrwpWtwJgWrhcsFMMfFFhFp"),
+        'p'
+    );
+    assert_eq!(
+        find_item_in_both_compartments("jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL"),
+        'L'
+    );
     assert_eq!(find_item_in_both_compartments("PmmdzqPrVvPwwTWBwg"), 'P');
-    assert_eq!(find_item_in_both_compartments("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"), 'v');
+    assert_eq!(
+        find_item_in_both_compartments("wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn"),
+        'v'
+    );
     assert_eq!(find_item_in_both_compartments("ttgJtRGJQctTZtZT"), 't');
-    assert_eq!(find_item_in_both_compartments("CrZsJsPPZsGzwwsLwLmpwMDw"), 's');
+    assert_eq!(
+        find_item_in_both_compartments("CrZsJsPPZsGzwwsLwLmpwMDw"),
+        's'
+    );
 }
 
 const LOWERCASE_SUBTRACT: u8 = 'a' as u8 - 1;
@@ -71,11 +87,7 @@ fn priority_works() {
 }
 
 fn part_2(input: &str) -> usize {
-    input.lines()
-    .tuples()
-    .map(find_badge)
-    .map(priority)
-    .sum()
+    input.lines().tuples().map(find_badge).map(priority).sum()
 }
 
 #[test]
@@ -86,7 +98,7 @@ PmmdzqPrVvPwwTWBwg
 wMqvLMZHhHMvwLHjbvcjnnSBnvTQFn
 ttgJtRGJQctTZtZT
 CrZsJsPPZsGzwwsLwLmpwMDw"#;
-    
+
     assert_eq!(part_2(input), 70);
 }
 
@@ -94,11 +106,18 @@ fn find_badge((a, b, c): (&str, &str, &str)) -> char {
     let mut a = a.chars().collect::<HashSet<_>>();
     a.retain(|item| b.contains(*item));
     a.retain(|item| c.contains(*item));
-    
+
     a.into_iter().next().expect("No badge found")
 }
 
 #[test]
 fn find_badge_works() {
-    assert_eq!(find_badge(("vJrwpWtwJgWrhcsFMMfFFhFp", "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL", "PmmdzqPrVvPwwTWBwg")), 'r');
+    assert_eq!(
+        find_badge((
+            "vJrwpWtwJgWrhcsFMMfFFhFp",
+            "jqHRNqRjqzjGDLGLrsFMfFZSrLrFZsSL",
+            "PmmdzqPrVvPwwTWBwg"
+        )),
+        'r'
+    );
 }

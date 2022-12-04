@@ -10,10 +10,11 @@ fn main() {
 }
 
 fn part_1(input: &str) -> usize {
-    input.lines()
-    .map(parse_ranges)
-    .filter(one_is_fully_contained)
-    .count()
+    input
+        .lines()
+        .map(parse_ranges)
+        .filter(one_is_fully_contained)
+        .count()
 }
 
 #[test]
@@ -31,7 +32,9 @@ fn part_1_works() {
 }
 
 fn parse_ranges(input: &str) -> (RangeInclusive<usize>, RangeInclusive<usize>) {
-    let (left, right) = input.split_once(',').expect("Expected ',' to separate ranges");
+    let (left, right) = input
+        .split_once(',')
+        .expect("Expected ',' to separate ranges");
 
     (parse_range(left), parse_range(right))
 }
@@ -46,8 +49,10 @@ fn parse_ranges_works() {
 }
 
 fn parse_range(input: &str) -> RangeInclusive<usize> {
-    let (lower, upper) = input.split_once('-').expect("Expected '-' to separate range bounds");
-    
+    let (lower, upper) = input
+        .split_once('-')
+        .expect("Expected '-' to separate range bounds");
+
     lower.parse().unwrap()..=upper.parse().unwrap()
 }
 
@@ -59,8 +64,7 @@ fn parse_range_works() {
 }
 
 fn one_is_fully_contained((a, b): &(RangeInclusive<usize>, RangeInclusive<usize>)) -> bool {
-    (a.start() <= b.start() && a.end() >= b.end()) ||
-    (b.start() <= a.start() && b.end() >= a.end())
+    (a.start() <= b.start() && a.end() >= b.end()) || (b.start() <= a.start() && b.end() >= a.end())
 }
 
 #[test]
@@ -70,10 +74,7 @@ fn one_is_fully_contained_works() {
 }
 
 fn part_2(input: &str) -> usize {
-    input.lines()
-    .map(parse_ranges)
-    .filter(do_overlap)
-    .count()
+    input.lines().map(parse_ranges).filter(do_overlap).count()
 }
 
 #[test]
