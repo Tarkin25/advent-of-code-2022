@@ -1,5 +1,5 @@
 fn main() {
-    let input = std::fs::read_to_string("input/day_1.txt").unwrap();
+    let input = std::fs::read_to_string("input.txt").unwrap();
 
     let part_1 = part_1(&input);
     let part_2 = part_2(&input);
